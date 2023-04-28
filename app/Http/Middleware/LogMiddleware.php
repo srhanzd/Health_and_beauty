@@ -21,7 +21,6 @@ class LogMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-//        return $next($request);
         try {
             $response = $next($request);//->this is the response
             if (app()->environment('local')) {

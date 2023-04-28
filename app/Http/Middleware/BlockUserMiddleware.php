@@ -24,10 +24,8 @@ class BlockUserMiddleware
     {
         try {
 
-//            if($request->has(['name'])&&Str::contains(request()->getUri(),'login')) {//},'email'])) {
     $blocked_date=User::query()
         ->where('name','=',$request->only('name'))
-//        ->orWhere('email','=',$request->only('email'))
         ->first()->blocked_date;
     if ($blocked_date!=null&&!$blocked_date->isPast()
 ) {
@@ -36,10 +34,7 @@ class BlockUserMiddleware
         return $this->returnError(888,$message);
     }
     return $next($request);
-//}
-//else {
-//    return $next($request);
-//}
+
         }
         catch (\Exception $exception){
             return $this->returnError($exception->getCode(),$exception->getMessage());
