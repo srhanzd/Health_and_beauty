@@ -23,9 +23,9 @@ Route::post('patient/reset_code_confirm', [AuthController::class, 'PatientResetC
 Route::post('patient/reset_password', [AuthController::class, 'PatientResetPassword'])->middleware(['ResetMiddleware','DBTransactionMiddleware','LogMiddleware']);;
 
 Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:user','DBTransactionMiddleware','LogMiddleware','HistoryMiddleware'] ],function(){
-    // authenticated staff routes here .
+    // authenticated staff routes here ...
     Route::post('logout',[AuthController::class, 'PatientLogout']);
-//    Route::post('patient_info',[AuthController::class, 'PatientInfo']);
+    Route::post('patient_info',[AuthController::class, 'PatientInfo']);
 
 
 });
