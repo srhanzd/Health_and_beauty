@@ -22,13 +22,13 @@ class SecretarySeeder extends Seeder
 
         for ($i = 1; $i <= 3; $i++) {
             $user=  User::query()->create([
-                'name' => 'Srahaf  ' . Str::random(5),
-                'first_name' => 'Srahaf  ' . Str::random(5),
-                'last_name' => 'Szoyed  ' . Str::random(5),
+                'name' => 'Srahaf' . Str::random(5),
+                'first_name' => 'Srahaf' . Str::random(5),
+                'last_name' => 'Szoyed' . Str::random(5),
                 'phone_number' => $faker->phoneNumber.random_int(1,10),
                 'telephone_number' => $faker->phoneNumber.random_int(1,10),
                 'email' => Str::random(5) . '@gmail.com',
-                'password' =>  bcrypt('srhan'),
+                'password' =>  bcrypt('srhan1999'),
 
             ]);
             Secretary::query()->create([

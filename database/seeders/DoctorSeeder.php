@@ -27,7 +27,7 @@ class DoctorSeeder extends Seeder
               'phone_number' => $faker->phoneNumber.random_int(1,10),
               'telephone_number' => $faker->phoneNumber.random_int(1,10),
                 'email' => Str::random(5) . '@gmail.com',
-                'password' =>  bcrypt('srhan'),
+                'password' =>  bcrypt('srhan1999'),
 
             ]);
           Doctor::query()->create([

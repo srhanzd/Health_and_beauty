@@ -29,7 +29,7 @@ class PatientSeeder extends Seeder
                 'phone_number' => $faker->phoneNumber.random_int(1,10),
                 'telephone_number' => $faker->phoneNumber.random_int(1,10),
                 'email' => 'Psrhan' . '@gmail.com',
-                'password' =>  bcrypt('srhan999'),
+                'password' =>  bcrypt('srhan1999'),
 
             ]);
             Patient::query()->create([
