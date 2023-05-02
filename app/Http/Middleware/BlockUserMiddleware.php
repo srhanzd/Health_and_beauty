@@ -24,16 +24,18 @@ class BlockUserMiddleware
     {
         try {
 
-    $blocked_date=User::query()
-        ->where('name','=',$request->only('name'))
-        ->first()->blocked_date;
-    if ($blocked_date!=null&&!$blocked_date->isPast()
-) {
-        $blocked_days = now()->diffInMinutes($blocked_date);
-        $message = 'Your account has been blocked. It will be unblocked after ' . $blocked_days . ' ' .'Minutes';
-        return $this->returnError(888,$message);
-    }
-    return $next($request);
+            $user=User::query()
+                ->where('name','=',$request->only('name'))
+                ->first();
+            if($user!=null) {
+                $blocked_date = $user->blocked_date;
+                if ($blocked_date != null && !$blocked_date->isPast()) {
+                    $blocked_days = now()->diffInMinutes($blocked_date);
+                    $message = 'Your account has been blocked. It will be unblocked after ' . $blocked_days . ' ' . 'Minutes';
+                    return $this->returnError(888, $message);
+                }
+            }
+            return $next($request);
 
         }
         catch (\Exception $exception){
