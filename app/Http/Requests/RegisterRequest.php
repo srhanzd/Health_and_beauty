@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
             'first_name' => 'required|min:3',
             'last_name' => 'required|min:3',
             'phone_number' => 'required|unique:users|digits:10',
-            'telephone_number' => 'required|unique:users|digits:10',
+            'telephone_number' => 'required|unique:users|digits_between:7,10',
             'email' => 'required|email|unique:users',
             'Birthdate' => 'required|date',//|numeric',
             'Address' => 'required',

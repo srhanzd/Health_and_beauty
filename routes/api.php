@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-// login shiuld be get
 Route::post('patient/login',[AuthController::class, 'PatientLogin'])->name('Login')->middleware(['BlockUserMiddleware','AuthenticationMiddleware','DBTransactionMiddleware','throttle:authentication','LogMiddleware']);
 Route::post('patient/register',[AuthController::class, 'PatientRegister'])->name('UserRegister')->middleware(['AuthenticationMiddleware','DBTransactionMiddleware','LogMiddleware']);
 Route::post('patient/forgot_password', [AuthController::class, 'PatientForgetPassword'])->middleware(['DBTransactionMiddleware','LogMiddleware']);;
