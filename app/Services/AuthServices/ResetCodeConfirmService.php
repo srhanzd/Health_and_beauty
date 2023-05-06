@@ -17,16 +17,19 @@ class ResetCodeConfirmService
             $input = $request->validated();
             $email = $request->only(['email']);//, 'email'
             $token = $request->only(['token']);//, 'email'
-            $password_reset=PasswordReset::query()->where('email','=',$email);
+            $password_reset=PasswordReset::query()->where('email','=',$email)
+                ->where('IsDeleted','=',0)
+
+            ;
             $created_at=$password_reset->first()->created_at;
             $now=now();
             if($now->diffInMinutes($created_at)>60){
-                $password_reset->delete();
+                $password_reset->update(['IsDeleted'=>1]);
                 return $this->returnError('077','the password reset code has been expired , please go to forget password page to send a new code for resting your password');
             }
             $success['token']=$request->input(['token']);
             $success['email']=$request->input(['email']);
-           return $this->returnData('code_confirm_data',$success,'the code confirmed successfully');
+            return $this->returnData('code_confirm_data',$success,'the code confirmed successfully');
 
         }
         catch

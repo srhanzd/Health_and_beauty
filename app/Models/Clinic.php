@@ -15,6 +15,13 @@ class Clinic extends Model
 
     ];
     public $timestamps=true;
+
+    public  function scopeFilter($query,array $filters){
+        if($filters['search_query'] ?? false){
+            $query->where('Name','like','%'.$filters['search_query']."%")
+                  ->where('IsDeleted','=',0);
+        }
+    }
     /**
      * Get the doctors  in the clinic.
      */

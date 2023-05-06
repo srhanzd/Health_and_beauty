@@ -15,12 +15,17 @@ class ResetPasswordService
             $input = $request->validated();
             $password = $request->input(['password']);//, 'email'
             $email=$request->input(['email']);
-            $user=User::query()->where('email', '=', $email)->first();
+            $user=User::query()->where('email', '=', $email)
+                ->where('IsDeleted','=',0)
+                ->first();
             $user->password=bcrypt($password);
             $user->save();
-            $password_reset=PasswordReset::query()->where('email','=',$email);
-            $password_reset->delete();
-            return $this->returnSuccessMessage('000','Your password has been changed successfully.');
+            $password_reset=PasswordReset::query()->where('email','=',$email)
+                ->where('IsDeleted','=',0)
+
+            ;
+            $password_reset->update(['IsDeleted'=>1]);
+            return $this->returnSuccessMessage('Your password has been changed successfully.');
         }
         catch
         (\Exception $e){

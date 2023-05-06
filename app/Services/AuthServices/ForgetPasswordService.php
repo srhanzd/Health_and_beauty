@@ -19,13 +19,20 @@ class ForgetPasswordService
         try {
             $input = $request->validated();
             $email = $request->input('email');
-            if (User::query()->where('email', '=', $email)->doesntExist()) {
+            if (User::query()->where('email', '=', $email)
+                ->where('IsDeleted','=',0)
+                ->doesntExist()) {
                 return $this->returnError(898, 'User dos not exists !!!');
             }
             $token = Str::random(10);
-            $old=PasswordReset::query()->where('email','=',$email);
+            $old=PasswordReset::query()->where('email','=',$email)
+                ->where('IsDeleted','=',0)
+            ;
             if($old->get()!=null){
-               $old->delete();
+               $old->each(function ($reset) {
+                   $reset->IsDeleted = 1;
+                   $reset->save();
+               });
             }
             PasswordReset::query()->insert([
                 'email' => $email,

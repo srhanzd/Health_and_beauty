@@ -25,8 +25,12 @@ class ResetMiddleware
 
             $token = $request->only(['token']);//, 'email'
             $email = $request->only(['email']);//, 'email'
-            $password_reset = PasswordReset::query()->where('email', '=', $email);
-            if (User::query()->where('email', '=', $email)->doesntExist()) {
+            $password_reset = PasswordReset::query()->where('email', '=', $email)
+                ->where('IsDeleted','=',0)
+            ;
+            if (User::query()->where('email', '=', $email)
+                ->where('IsDeleted','=',0)
+                ->doesntExist()) {
                 return $this->returnError(898, 'User dos not exists !!!');
             }
             if ($password_reset->first() == null) {
