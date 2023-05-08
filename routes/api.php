@@ -23,6 +23,10 @@ Route::put('patient/reset_password', [AuthController::class, 'PatientResetPasswo
 
 Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:user','DBTransactionMiddleware','LogMiddleware','HistoryMiddleware'] ],function(){
     // authenticated staff routes here ...
+    Route::get('clinic/search',[\App\Http\Controllers\SearchController::class, 'ClinicsSearch'])->name('search');
+    Route::get('service/search',[\App\Http\Controllers\SearchController::class, 'ServicesSearch'])->name('search');
+    Route::get('doctor/search',[\App\Http\Controllers\SearchController::class, 'DoctorsSearch'])->name('search');
+
     Route::get('logout',[AuthController::class, 'PatientLogout']);
 //    Route::post('patient_info',[AuthController::class, 'PatientInfo']);
 

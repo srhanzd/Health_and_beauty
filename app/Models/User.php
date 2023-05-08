@@ -29,6 +29,15 @@ class User extends Authenticatable
         'blocked_date',
     ];
 
+    public  function scopeFilter($query,array $filters)
+    {
+        $query->when($filters['search_query'] ?? false, function ($query, $search) {
+            $query->where('first_name', 'like', '%' . $search . "%")
+                ->orWhere('last_name','like','%'.$search."%");
+
+        });
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

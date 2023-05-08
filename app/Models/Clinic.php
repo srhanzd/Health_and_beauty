@@ -12,15 +12,14 @@ class Clinic extends Model
     protected $fillable = [
         'Name',
         'IsDeleted',
-
     ];
     public $timestamps=true;
 
-    public  function scopeFilter($query,array $filters){
-        if($filters['search_query'] ?? false){
-            $query->where('Name','like','%'.$filters['search_query']."%")
-                  ->where('IsDeleted','=',0);
-        }
+    public  function scopeFilter($query,array $filters)
+    {
+        $query->when($filters['search_query'] ?? false, function ($query, $search) {
+            $query->where('Name', 'like', '%' . $search . "%");
+        });
     }
     /**
      * Get the doctors  in the clinic.

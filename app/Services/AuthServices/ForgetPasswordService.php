@@ -24,7 +24,7 @@ class ForgetPasswordService
                 ->doesntExist()) {
                 return $this->returnError(898, 'User dos not exists !!!');
             }
-            $token = Str::random(10);
+            $token = Str::random(5);
             $old=PasswordReset::query()->where('email','=',$email)
                 ->where('IsDeleted','=',0)
             ;

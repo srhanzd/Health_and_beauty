@@ -16,6 +16,14 @@ class Service extends Model
         'Step',
         'IsDeleted',
     ];
+    public  function scopeFilter($query,array $filters)
+    {
+        $query->when($filters['search_query'] ?? false, function ($query, $search) {
+            $query->where('Name', 'like', '%' . $search . "%")
+                ->orWhere('Description','like','%'.$search."%");
+        });
+    }
+
     public $timestamps=true;
     public function clinic()
     {

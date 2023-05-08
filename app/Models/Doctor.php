@@ -19,6 +19,17 @@ class Doctor extends Model
         'IsHeadOfClinic',
 
     ];
+    public  function scopeFilter($query,array $filters)
+    {
+        $query->when($filters['search_query'] ?? false, function ($query, $search) {
+            $query->where('Degree', 'like', '%' . $search . "%")
+                ->orWhere('Specialization','like','%'.$search."%");
+
+        });
+    }
+
+
+
     public $timestamps=true;
     /**
      * Get the user  record associated with the doctor.
