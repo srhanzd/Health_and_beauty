@@ -22,11 +22,14 @@ class ResetMiddleware
     {
         try {
 
-
-//            $token = $request->only(['token']);//, 'email'
-//            $email = $request->only(['email']);//, 'email'
-            $token = $request->header('token');
-            $email = $request->header('email');
+            if($request->method()=='GET'){
+                $token = $request->header('token');
+                $email = $request->header('email');
+            }
+            else {
+                $token = $request->only(['token'])['token'];//, 'email'
+                $email = $request->only(['email']);//, 'email'
+            }
 
             $password_reset = PasswordReset::query()->where('email', '=', $email)
                 ->where('IsDeleted','=',0)
