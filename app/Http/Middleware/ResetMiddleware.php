@@ -23,8 +23,11 @@ class ResetMiddleware
         try {
 
 
-            $token = $request->only(['token']);//, 'email'
-            $email = $request->only(['email']);//, 'email'
+//            $token = $request->only(['token']);//, 'email'
+//            $email = $request->only(['email']);//, 'email'
+            $token = $request->header('token');
+            $email = $request->header('email');
+
             $password_reset = PasswordReset::query()->where('email', '=', $email)
                 ->where('IsDeleted','=',0)
             ;
@@ -37,7 +40,7 @@ class ResetMiddleware
                 return $this->returnError(298, 'please go to forget password page to send code for resting your password');
 
             }
-            if ($password_reset->first()->token != $token['token']) {
+            if ($password_reset->first()->token != $token) {
                 return $this->returnError('777', 'invalid code please go to forget password page to send code for resting your password');
             }
             return $next($request);

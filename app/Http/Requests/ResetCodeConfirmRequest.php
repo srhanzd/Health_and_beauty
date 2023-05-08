@@ -39,4 +39,16 @@ class ResetCodeConfirmRequest extends FormRequest
 
         throw new HttpResponseException($this->returnError(000,$validator->errors()));
     }
+    protected function prepareForValidation()
+    {
+        // Retrieve specific header values
+        $token = $this->header('token');
+        $email = $this->header('email');
+
+        // Set the header values back to the request
+        $this->merge([
+            'token' => $token,
+            'email' => $email,
+        ]);
+    }
 }
