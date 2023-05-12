@@ -42,7 +42,7 @@ class RegisterService
                 $success['user'] = $user;
                 $success['user'] ['token'] = $user->createToken('MyApp', ['user'])->accessToken;
                 $doctors=Doctor::query()->where('IsDeleted','=',0)
-                    ->latest()->with("image")->paginate(2);//5
+                    ->latest()->with("image")->with('user')->paginate(2);//5
                 $success['doctors']=$doctors;
                 $clinics=Clinic::query()->where('IsDeleted','=',0)
                     ->latest()->with("images")->paginate(2);//5
