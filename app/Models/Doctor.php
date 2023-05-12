@@ -45,9 +45,9 @@ class Doctor extends Model
     {
         return $this->belongsTo(Clinic::class,'ClinicId','id');
     }
-    public function images()
+    public function image()//s
     {
-        return $this->hasMany(Image::class,'DoctorId','id');
+        return $this->hasOne(Image::class,'DoctorId','id');//has many
     }
 //    public function admins(){
 //        return $this->hasMany(Admins::class,'DoctorId','id');->has one not many

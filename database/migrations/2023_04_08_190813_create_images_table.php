@@ -16,7 +16,7 @@ class CreateImagesTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('ClinicId')->nullable(true);
-            $table->unsignedBigInteger('DoctorId')->nullable(true);
+            $table->unsignedBigInteger('DoctorId')->nullable(true);//unique
             $table->tinyInteger('IsDeleted')->default(0)->comment('0=>active,1=>inactive');
             $table->tinyInteger('LocalImage')->nullable(false)->default(0)->comment('0=>no,1=>yes');
             $table->foreign('ClinicId')->references('id')->on('Clinics');
