@@ -93,14 +93,14 @@ class User extends Authenticatable
     public function secretary_working_days(){
         return $this->belongsToMany(WorkingDay::class,'secretary_working_hours');
     }
-    public function doctor_appointments()
-    {
-        return $this->hasMany(Appointment::class,'DoctorId','id');
-    }
-    public function patient_appointments()
-    {
-        return $this->hasMany(Appointment::class,'PatientId','id');
-    }
+//    public function doctor_appointments()
+//    {
+//        return $this->hasMany(Appointment::class,'DoctorId','id');
+//    }
+//    public function patient_appointments()
+//    {
+//        return $this->hasMany(Appointment::class,'PatientId','id');
+//    }
     public function histories()
     {
         return $this->hasMany(History::class,'UserId','id');

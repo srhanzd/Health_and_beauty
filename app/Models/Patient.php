@@ -25,4 +25,8 @@ class Patient extends Model
     {
         return $this->hasMany(DynamicAttributeValue::class,'PatientId','id');
     }
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class,'PatientId','id');
+    }
 }

@@ -22,8 +22,8 @@ class CreateDynamicAttributeValuesTable extends Migration
             $table->unsignedBigInteger('DynamicAttributeId');
             $table->foreign('DynamicAttributeId')->references('id')->on('Dynamic_Attributes');
             $table->tinyInteger('Disable')->default(0);
-            $table->unsignedBigInteger('ClinicId');
-            $table->foreign('ClinicId')->references('id')->on('Clinics');
+//            $table->unsignedBigInteger('ClinicId');
+//            $table->foreign('ClinicId')->references('id')->on('Clinics');
             $table->unsignedBigInteger('PatientId');
             $table->foreign('PatientId')->references('id')->on('Patients');
             $table->tinyInteger('IsDeleted')->default(0)->comment('0=>active,1=>inactive');

@@ -49,6 +49,11 @@ class Doctor extends Model
     {
         return $this->hasOne(Image::class,'DoctorId','id');//has many
     }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class,'DoctorId','id');
+    }
 //    public function admins(){
 //        return $this->hasMany(Admins::class,'DoctorId','id');->has one not many
 //    }

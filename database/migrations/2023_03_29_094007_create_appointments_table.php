@@ -23,8 +23,8 @@ class CreateAppointmentsTable extends Migration
             $table->string('Status')->default(0)->comment('0=>pending,1=>complete,2=>cancel');
             $table->tinyInteger('IsDeleted')->default(0)->comment('0=>active,1=>inactive');
             $table->tinyInteger('Notified')->default(0)->comment('0=>no,1=>yes');
-            $table->foreign('PatientId')->references('id')->on('Users');
-            $table->foreign('DoctorId')->references('id')->on('Users');
+            $table->foreign('PatientId')->references('id')->on('Patients');
+            $table->foreign('DoctorId')->references('id')->on('Doctors');
             $table->foreign('ServiceId')->references('id')->on('Services');
             $table->timestamps();
         });

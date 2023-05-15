@@ -44,10 +44,10 @@ class Clinic extends Model
     {
         return $this->hasMany(DynamicAttribute::class,'ClinicId','id');
     }
-    public function dynamic_attributes_values()
-    {
-        return $this->hasMany(DynamicAttributeValue::class,'ClinicId','id');
-    }
+//    public function dynamic_attributes_values()
+//    {
+//        return $this->hasMany(DynamicAttributeValue::class,'ClinicId','id');
+//    }
     public function static_attributes()
     {
         return $this->hasMany(StaticAttribute::class,'ClinicId','id');

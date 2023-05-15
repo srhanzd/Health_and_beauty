@@ -16,7 +16,7 @@ class DynamicAttributeValue extends Model
         'ValueBoolean',
         'DynamicAttributeId',
         'Disable',
-        'ClinicId',
+//        'ClinicId',
         'PatientId',
         'IsDeleted',
 
@@ -26,10 +26,10 @@ class DynamicAttributeValue extends Model
     {
         return $this->belongsTo(DynamicAttribute::class,'DynamicAttributeId','id');
     }
-    public function clinic()
-    {
-        return $this->belongsTo(Clinic::class,'ClinicId','id');
-    }
+//    public function clinic()
+//    {
+//        return $this->belongsTo(Clinic::class,'ClinicId','id');
+//    }
     public function patient()
     {
         return $this->belongsTo(Patient::class,'PatientId','id');

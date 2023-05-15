@@ -42,7 +42,7 @@ class AppointmentsSeeder extends Seeder
         for ($i=1;$i<=3;$i++){
 //        foreach ($services as $service){
               $appointment=  Appointment::query()->create([
-                    'PatientId'=>7,
+                    'PatientId'=>1,
                     'DoctorId'=>$i,
                     'ServiceId'=>$service,
                     'Date'=>$date->toDateString(),

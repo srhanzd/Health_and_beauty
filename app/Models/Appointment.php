@@ -19,13 +19,13 @@ class Appointment extends Model
         'Notified',
     ];
     public $timestamps=true;
-    public function user_patient()
+    public function patient()
     {
-        return $this->belongsTo(User::class,'PatientId','id');
+        return $this->belongsTo(Patient::class,'PatientId','id');
     }
-    public function user_doctor()
+    public function doctor()
     {
-        return $this->belongsTo(User::class,'DoctorId','id');
+        return $this->belongsTo(Doctor::class,'DoctorId','id');
     }
     public function service()
     {
