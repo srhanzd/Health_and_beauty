@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
     }
     public function render($request, Throwable $exception)
     {
-        return $this->returnError($exception->getCode(),$exception->getMessage());
+        return $this->returnError($exception->getCode(),$exception->getMessage(),$request->header('lang'));
 
     }
 }

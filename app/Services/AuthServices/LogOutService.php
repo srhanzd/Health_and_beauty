@@ -20,11 +20,11 @@ class LogOutService
                 $token->revoke();
                 $token->delete();
             }
-            return $this->returnSuccessMessage('logout successfully');
+            return $this->returnSuccessMessage('logout successfully',"S000",$request->header('lang'));
 
         }
         catch (\Exception $exception){
-            return $this->returnError($exception->getCode(),$exception->getMessage());
+            return $this->returnError($exception->getCode(),$exception->getMessage(),$request->header('lang'));
         }
     }
 

@@ -47,7 +47,7 @@ $this->ResetCodeConfirm=$ResetCodeConfirm;
         catch
         (\Exception $e){
 
-            return $this->returnError($e->getLine(), $e->getMessage());
+            return $this->returnError($e->getLine(), $e->getMessage(),$request->header('lang'));
 
         }
     }
@@ -59,7 +59,7 @@ $this->ResetCodeConfirm=$ResetCodeConfirm;
         catch
         (\Exception $e){
 
-            return $this->returnError($e->getLine(), $e->getMessage());
+            return $this->returnError($e->getLine(), $e->getMessage(),$request->header('lang'));
 
         }
     }
@@ -73,7 +73,7 @@ $this->ResetCodeConfirm=$ResetCodeConfirm;
           return  $this->LogOutService->LogOut($request);
         }
         catch (\Exception $exception){
-            return $this->returnError($exception->getCode(),$exception->getMessage());
+            return $this->returnError($exception->getLine(), $exception->getMessage(),$request->header('lang'));
         }
 
     }
@@ -82,7 +82,7 @@ $this->ResetCodeConfirm=$ResetCodeConfirm;
           return  $this->ForgetPassword->ForgetPassword($request);
         }
         catch (\Exception $exception){
-            return $this->returnError($exception->getCode(),$exception->getMessage());
+            return $this->returnError($exception->getLine(), $exception->getMessage(),$request->header('lang'));
         }
 
     }
@@ -91,7 +91,7 @@ $this->ResetCodeConfirm=$ResetCodeConfirm;
         try {
             return $this->ResetCodeConfirm->CodeConfirm($request);
         } catch (\Exception $exception) {
-            return $this->returnError($exception->getCode(), $exception->getMessage());
+            return $this->returnError($exception->getLine(), $exception->getMessage(),$request->header('lang'));
         }
     }
         public function PatientResetPassword(ResetPasswordRequest $request){
@@ -99,7 +99,7 @@ $this->ResetCodeConfirm=$ResetCodeConfirm;
           return  $this->ResetPassword->ResetPassword($request);
         }
         catch (\Exception $exception){
-            return $this->returnError($exception->getCode(),$exception->getMessage());
+            return $this->returnError($exception->getLine(), $exception->getMessage(),$request->header('lang'));
         }
 
     }

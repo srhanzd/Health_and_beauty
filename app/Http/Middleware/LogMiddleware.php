@@ -53,7 +53,7 @@ class LogMiddleware
             return $response;
         }
         catch (Exception $exception){
-            return $this->returnError($exception->getCode(),$exception->getMessage());
+            return $this->returnError($exception->getCode(),$exception->getMessage(),$request->header('lang'));
         }
     }
 }

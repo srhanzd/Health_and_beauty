@@ -37,9 +37,9 @@ public function LogIn(LoginRequest $request){
                 ->where('LocalImage','=',1)->get();
             $success['center_images']=$images;
 
-            return $this->returnData('data', $success);
+            return $this->returnData('data', $success,'You have successfully logged in.',$request->header('lang'));
         } else {
-            return $this->returnError('E990999', 'invalid user name or password');
+            return $this->returnError('E990999', 'invalid user name or password',$request->header('lang'));
 
         }
 

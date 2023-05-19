@@ -25,12 +25,12 @@ class ResetPasswordService
 
             ;
             $password_reset->update(['IsDeleted'=>1]);
-            return $this->returnSuccessMessage('Your password has been changed successfully.');
+            return $this->returnSuccessMessage('Your password has been changed successfully.',"S000",$request->header('lang'));
         }
         catch
         (\Exception $e){
 
-            return $this->returnError($e->getLine(), $e->getMessage());
+            return $this->returnError($e->getLine(), $e->getMessage(),$request->header('lang'));
 
         }
 

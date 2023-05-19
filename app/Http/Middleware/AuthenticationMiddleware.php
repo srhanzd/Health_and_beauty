@@ -24,7 +24,7 @@ class AuthenticationMiddleware
         if(\auth('user'))
         return $response;
         else
-            return $this->returnError('s000999','the Authentication is fucked up');
+            return $this->returnError('s000999','Authentication failed.',$request->header('lang'));
 
     }
 }

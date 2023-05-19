@@ -51,9 +51,9 @@ class RegisterService
                     ->where('LocalImage','=',1)->get();
                 $success['center_images']=$images;
 
-                return $this->returnData('user', $success);
+                return $this->returnData('user', $success,'You have successfully registered.',$request->header('lang'));
             } else {
-                return $this->returnError('E990999', 'some thing went rung .');
+                return $this->returnError('E990999', 'Something went wrong.',$request->header('lang'));
 
             }
 

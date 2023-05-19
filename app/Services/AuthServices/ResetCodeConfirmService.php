@@ -25,17 +25,17 @@ class ResetCodeConfirmService
             $now=now();
             if($now->diffInMinutes($created_at)>60){
                 $password_reset->update(['IsDeleted'=>1]);
-                return $this->returnError('077','the password reset code has been expired , please go to forget password page to send a new code for resting your password');
+                return $this->returnError('077','The password reset code has expired. Please go to the Forgot Password page to generate a new code for resetting your password.',$request->header('lang'));
             }
             $success['token']=$request->input(['token']);
             $success['email']=$request->input(['email']);
-            return $this->returnData('code_confirm_data',$success,'the code confirmed successfully');
+            return $this->returnData('code_confirm_data',$success,'The code has been confirmed successfully.',$request->header('lang'));
 
         }
         catch
         (\Exception $e){
 
-            return $this->returnError($e->getLine(), $e->getMessage());
+            return $this->returnError($e->getLine(), $e->getMessage(),$request->header('lang'));
 
         }
     }

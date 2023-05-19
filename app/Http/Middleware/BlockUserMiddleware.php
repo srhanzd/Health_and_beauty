@@ -30,16 +30,16 @@ class BlockUserMiddleware
             if($user!=null) {
                 $blocked_date = $user->blocked_date;
                 if ($blocked_date != null && !$blocked_date->isPast()) {
-                    $blocked_days = now()->diffInMinutes($blocked_date);
-                    $message = 'Your account has been blocked. It will be unblocked after ' . $blocked_days . ' ' . 'Minutes';
-                    return $this->returnError(888, $message);
+                    $blocked_Minutes = now()->diffInMinutes($blocked_date);
+                    $message = 'Your account has been blocked. It will be unblocked after ' . $blocked_Minutes . ' ' . 'Minutes';
+                    return $this->returnError(888, $message,$request->header('lang'));
                 }
             }
             return $next($request);
 
         }
         catch (\Exception $exception){
-            return $this->returnError($exception->getCode(),$exception->getMessage());
+            return $this->returnError($exception->getCode(),$exception->getMessage(),$request->header('lang'));
         }
     }
 }

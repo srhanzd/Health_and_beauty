@@ -69,6 +69,6 @@ class RegisterRequest extends FormRequest
 //        ];
        // $code = $this->returnCodeAccordingToInput($validator);
 
-        throw new HttpResponseException($this->returnError(000,$validator->errors()));//$this->returnValidationError($code, $validator));
+        throw new HttpResponseException($this->returnError(000,$validator->errors()->first(),$this->header('lang')));
     }
 }

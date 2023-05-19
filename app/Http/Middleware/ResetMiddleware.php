@@ -37,21 +37,21 @@ class ResetMiddleware
             if (User::query()->where('email', '=', $email)
                 ->where('IsDeleted','=',0)
                 ->doesntExist()) {
-                return $this->returnError(898, 'User dos not exists !!!');
+                return $this->returnError(898, 'User dos not exists !!!',$request->header('lang'));
             }
             if ($password_reset->first() == null) {
-                return $this->returnError(298, 'please go to forget password page to send code for resting your password');
+                return $this->returnError(298, 'Please go to the "Forgot Password" page to send a code for resetting your password.',$request->header('lang'));
 
             }
             if ($password_reset->first()->token != $token) {
-                return $this->returnError('777', 'invalid code please go to forget password page to send code for resting your password');
+                return $this->returnError('777', 'Invalid code. Please go to the "Forgot Password" page to send a code for resetting your password.',$request->header('lang'));
             }
             return $next($request);
         }
         catch
         (\Exception $e){
 
-            return $this->returnError($e->getLine(), $e->getMessage());
+            return $this->returnError($e->getLine(), $e->getMessage(),$request->header('lang'));
 
         }
     }

@@ -2,6 +2,11 @@
 
 namespace App\Traits;
 
+use Stichoza\GoogleTranslate\Exceptions\LargeTextException;
+use Stichoza\GoogleTranslate\Exceptions\RateLimitException;
+use Stichoza\GoogleTranslate\Exceptions\TranslationRequestException;
+use Stichoza\GoogleTranslate\GoogleTranslate;
+
 trait GeneralTrait
 {
 
@@ -10,31 +15,57 @@ trait GeneralTrait
         return app()->getLocale();
     }
 
-    public function returnError($errNum, $msg)
+    /**
+     * @throws LargeTextException
+     * @throws RateLimitException
+     * @throws TranslationRequestException
+     */
+    public function returnError($errNum, $msg,$lang)
     {
+        if($lang=='ar')
+            $msg=$this->translate($msg);
         return response()->json([
             'status' => false,
             'errNum' => $errNum,
-            'msg' => $msg
+            'msg' => $msg,
+//            'msg_ar' => $this->translate($msg),
+
         ]);
     }
 
 
-    public function returnSuccessMessage($msg = "", $errNum = "S000")
+    /**
+     * @throws LargeTextException
+     * @throws RateLimitException
+     * @throws TranslationRequestException
+     */
+    public function returnSuccessMessage($msg = "", $errNum = "S000",$lang)
     {
+        if($lang=='ar')
+            $msg=$this->translate($msg);
         return [
             'status' => true,
             'errNum' => $errNum,
-            'msg' => $msg
+            'msg' => $msg,
+          //  'msg_ar' => $this->translate($msg),
+
         ];
     }
 
-    public function returnData($key, $value, $msg = "")
+    /**
+     * @throws LargeTextException
+     * @throws RateLimitException
+     * @throws TranslationRequestException
+     */
+    public function returnData($key, $value, $msg = "",$lang)
     {
+        if($lang=='ar')
+            $msg=$this->translate($msg);
         return response()->json([
             'status' => true,
             'errNum' => "S000",
             'msg' => $msg,
+//            'msg_ar' => $this->translate($msg),
             $key => $value
         ]);
     }
@@ -53,6 +84,30 @@ trait GeneralTrait
         $code = $this->getErrorCode($inputs[0]);
         return $code;
     }
+
+    /**
+     * @throws LargeTextException
+     * @throws RateLimitException
+     * @throws TranslationRequestException
+     */
+    private function translate($content)
+    {
+//            if($this->getLocale()=='ar') {
+                // Import the GoogleTranslate class
+
+                // Create an instance of GoogleTranslate
+                $translator = new GoogleTranslate();
+
+                // Set the source and target languages
+                $translator->setSource('en'); // Set the source language to English
+                $translator->setTarget('ar'); // Set the target language to Arabic
+
+                // Translate the content
+                return $translator->translate($content);
+//            }
+//            return null;
+    }
+
 
     public function getErrorCode($input)
     {
