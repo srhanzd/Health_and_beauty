@@ -19,7 +19,7 @@ class ServicesSeeder extends Seeder
         $clinics=Clinic::query()->get()->all();
         foreach ($clinics as $clinic){
             $step=0;
-            for ($i=1;$i<=3;$i++){
+            for ($i=1;$i<=15;$i++){
                 Service::query()->create([
                     'ClinicId'=>$clinic->id,
                     'Name'=>'service '.$i.' for clinic '.$clinic->id,

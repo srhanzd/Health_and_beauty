@@ -19,7 +19,7 @@ class DoctorWorkingHoursSeeder extends Seeder
     public function run()
     {
         $working_days=WorkingDay::query()->where('off','=',0)->get();
-         for ($i = 1; $i <= 3; $i++) {
+         for ($i = 1; $i <= 15; $i++) {
              foreach ($working_days as $day) {
                  if ($day->id == 1) {
                      DoctorWorkingHour::query()->create([

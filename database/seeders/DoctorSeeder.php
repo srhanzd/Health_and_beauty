@@ -19,14 +19,14 @@ class DoctorSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 15; $i++) {
           $user=  User::query()->create([
-                'name' => 'Dsrhan  ' . Str::random(5),
-                'first_name' => 'Dsrhan  ' . Str::random(5),
-                'last_name' => 'Dzoyed  ' . Str::random(5),
-              'phone_number' => $faker->phoneNumber.random_int(1,10),
-              'telephone_number' => $faker->phoneNumber.random_int(1,10),
-                'email' => Str::random(5) . '@gmail.com',
+                'name' => 'Dsrhan  '.$i . Str::random(5),
+                'first_name' => 'Dsrhan  '.$i . Str::random(5),
+                'last_name' => 'Dzoyed  '.$i . Str::random(5),
+              'phone_number' => $faker->phoneNumber.$i.random_int(1,10),
+              'telephone_number' => $faker->phoneNumber.$i.random_int(1,10),
+                'email' => Str::random(5).$i . '@gmail.com',
                 'password' =>  bcrypt('srhan1999'),
 
             ]);
