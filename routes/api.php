@@ -23,9 +23,12 @@ Route::put('patient/reset_password', [AuthController::class, 'PatientResetPasswo
 
 Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:user','DBTransactionMiddleware','LogMiddleware','HistoryMiddleware'] ],function(){
     // authenticated staff routes here ...
-    Route::get('clinic/search',[\App\Http\Controllers\SearchController::class, 'ClinicsSearch'])->name('search');
-    Route::get('service/search',[\App\Http\Controllers\SearchController::class, 'ServicesSearch'])->name('search');
-    Route::get('doctor/search',[\App\Http\Controllers\SearchController::class, 'DoctorsSearch'])->name('search');
+    Route::get('clinic/search',[\App\Http\Controllers\SearchController::class, 'ClinicsSearch'])->name('search-clinic');
+    Route::get('service/search',[\App\Http\Controllers\SearchController::class, 'ServicesSearch'])->name('search-service');
+    Route::get('doctor/search',[\App\Http\Controllers\SearchController::class, 'DoctorsSearch'])->name('search-doctor');
+    Route::get('doctors',[\App\Http\Controllers\DoctorController::class, 'GetDoctors'])->name('doctors');
+    Route::get('clinics',[\App\Http\Controllers\ClinicController::class, 'GetClinics'])->name('clinics');
+    Route::get('center/images',[\App\Http\Controllers\ImageController::class, 'GetCenterImages'])->name('center-images');
 
     Route::get('logout',[AuthController::class, 'PatientLogout']);
 //    Route::post('patient_info',[AuthController::class, 'PatientInfo']);

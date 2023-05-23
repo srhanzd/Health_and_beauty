@@ -40,18 +40,8 @@ class RegisterService
 
                 $user = User::select('users.*')->find(auth()->guard('user')->user()->id);
                 $success['user'] = $user;
-                $success['user'] ['token'] = $user->createToken('MyApp', ['user'])->accessToken;
-                $doctors=Doctor::query()->where('IsDeleted','=',0)
-                    ->latest()->with("image")->with('user')->paginate(10);//5
-                $success['doctors']=$doctors;
-                $clinics=Clinic::query()->where('IsDeleted','=',0)
-                    ->latest()->with("images")->paginate(10);//5
-                $success['clinics']=$clinics;
-                $images=Image::query()->where('IsDeleted','=',0)
-                    ->where('LocalImage','=',1)->get();
-                $success['center_images']=$images;
-
-                return $this->returnData('user', $success,'You have successfully registered.',$request->header('lang'));
+                $success ['token'] = $user->createToken('MyApp', ['user'])->accessToken;
+                return $this->returnData('data', $success,'You have successfully registered.',$request->header('lang'));
             } else {
                 return $this->returnError('E990999', 'Something went wrong.',$request->header('lang'));
 
