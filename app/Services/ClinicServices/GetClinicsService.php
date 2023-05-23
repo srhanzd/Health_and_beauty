@@ -15,7 +15,7 @@ class GetClinicsService
         try {
 
             $clinics = Clinic::query()->where('IsDeleted', '=', 0)
-                ->latest()->with("images")->paginate(10);//5
+                ->latest()->with("images")->paginate(10);
 
             return $this->returnData('clinics', $clinics, 'Clinics retrieved successfully.', $request->header('lang'));
 

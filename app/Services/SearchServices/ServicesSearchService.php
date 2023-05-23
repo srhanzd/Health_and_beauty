@@ -14,7 +14,7 @@ class ServicesSearchService
             $input = $request->validated();
                 $services=Service::query()
                     ->where('IsDeleted','=',0)
-                    ->latest()->filter(request()->only('search_query'))->paginate(5);
+                    ->latest()->filter(request()->only('search_query'))->paginate(10);
             if(!$services->isEmpty()){
                 return $this->returnData('services',$services,'search results',$request->header('lang'));
             }
