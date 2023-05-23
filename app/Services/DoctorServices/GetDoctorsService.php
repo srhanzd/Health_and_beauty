@@ -16,7 +16,7 @@ class GetDoctorsService
         try {
 
             $doctors=Doctor::query()->where('IsDeleted','=',0)
-                ->latest()->with("image")->with('user')->paginate(5);//5
+                ->latest()->with("image")->with('user')->paginate(10);//5
 
             return $this->returnData('doctors', $doctors, 'Doctors retrieved successfully.', $request->header('lang'));
 
