@@ -37,7 +37,6 @@ class ClinicDoctorsRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        // dd($validator->errors());
 
 
         throw new HttpResponseException($this->returnError(000,$validator->errors()->first(),$this->header('lang')));
