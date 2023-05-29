@@ -31,6 +31,7 @@ Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:us
     Route::get('center/images',[\App\Http\Controllers\ImageController::class, 'GetCenterImages'])->name('center-images');
     Route::get('doctor/availability',[\App\Http\Controllers\DoctorController::class, 'GetDoctorAvailability'])->name('doctor-availability');
     Route::get('clinic/doctors',[\App\Http\Controllers\ClinicController::class, 'GetClinicDoctors'])->name('clinic-doctors');
+    Route::get('clinic/services',[\App\Http\Controllers\ServiceController::class, 'GetServices'])->name('clinic-services');
 
     Route::get('logout',[AuthController::class, 'PatientLogout']);
 //    Route::post('patient_info',[AuthController::class, 'PatientInfo']);

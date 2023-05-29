@@ -11,11 +11,15 @@ class ClinicsSearchService
     use GeneralTrait;
     public function Search(SearchRequest $request){
         try {
-            $input = $request->validated();
+            $search_query = $request->validated();
+            if($search_query==null){
+                return $this->returnError('333','No results match your search request ',$request->header('lang'));
+
+            }
 
             $clinics=Clinic::query()
                 ->where('IsDeleted','=',0)
-                ->latest()->filter(request()->only('search_query'))->paginate(10);
+                ->latest()->filter($search_query)->paginate(10);
 
             if(!$clinics->isEmpty()){
                 return $this->returnData('clinics',$clinics,'search results',$request->header('lang'));
