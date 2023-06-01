@@ -33,7 +33,8 @@ class User extends Authenticatable
     {
         $query->when($filters['search_query'] ?? false, function ($query, $search) {
             $query->where('first_name', 'like', '%' . $search . "%")
-                ->orWhere('last_name','like','%'.$search."%");
+                ->orWhere('last_name','like','%'.$search."%")
+                ->orWhereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ['%' . $search . '%']);
 
         });
     }
@@ -108,5 +109,11 @@ class User extends Authenticatable
     public function notifications()
     {
         return $this->hasMany(Notification::class,'ToUserId','id');
+    }
+    protected $appends = ['full_name'];
+
+    public function getFullNameAttribute()
+    {
+        return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
     }
 }
