@@ -12,7 +12,11 @@ class ServicesSearchService
     public function Search(SearchRequest $request){
         try {
             $search_query = $request->validated();
-                $services=Service::query()
+            if($search_query==null){
+                return $this->returnError('333','No results match your search request ',$request->header('lang'));
+
+            }
+            $services=Service::query()
                     ->where('IsDeleted','=',0)
                     ->latest()->filter($search_query)->get();//->paginate(10);
             if(!$services->isEmpty()){
