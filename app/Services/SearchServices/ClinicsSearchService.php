@@ -19,7 +19,7 @@ class ClinicsSearchService
 
             $clinics=Clinic::query()
                 ->where('IsDeleted','=',0)
-                ->latest()->filter($search_query);//->paginate(10);
+                ->latest()->filter($search_query)->get();//->paginate(10);
 
             if(!$clinics->isEmpty()){
                 return $this->returnData('clinics',$clinics,'search results',$request->header('lang'));
