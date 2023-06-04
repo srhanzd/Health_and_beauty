@@ -17,6 +17,7 @@ class ClinicsSearchService
 
             }
 
+
             $clinics=Clinic::query()
                 ->where('IsDeleted','=',0)
                 ->latest()->filter($search_query)->get();//->paginate(10);

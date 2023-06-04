@@ -17,6 +17,7 @@ class DoctorsSearchService
                 return $this->returnError('333','No results match your search request ',$request->header('lang'));
 
             }
+
             $users=User::query()
                 ->where('IsDeleted','=',0)
                 ->latest()->filter($search_query)->with('doctor')->get();//->paginate(10);

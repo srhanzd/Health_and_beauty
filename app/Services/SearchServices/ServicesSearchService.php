@@ -16,6 +16,7 @@ class ServicesSearchService
                 return $this->returnError('333','No results match your search request ',$request->header('lang'));
 
             }
+
             $services=Service::query()
                     ->where('IsDeleted','=',0)
                     ->latest()->filter($search_query)->get();//->paginate(10);
