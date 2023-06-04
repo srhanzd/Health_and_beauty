@@ -15,7 +15,7 @@ class DoctorsSearchService
             $search_query = $request->validated();
             $users=User::query()
                 ->where('IsDeleted','=',0)
-                ->latest()->filter($search_query)->with('doctor')->paginate(10);
+                ->latest()->filter($search_query)->with('doctor');//->paginate(10);
             if(!$users->isEmpty()) {
                 $users = $users->reject(function ($user) {
                     return $user->doctor === null;
@@ -27,7 +27,7 @@ class DoctorsSearchService
             $doctors=Doctor::query()
                 ->where('IsDeleted','=',0)
                 ->latest()->filter($search_query)
-                ->with('user')->paginate(5);
+                ->with('user');//->paginate(5);
             if(!$doctors->isEmpty()){
                 return $this->returnData('doctors',$doctors,'search results',$request->header('lang'));
             }
