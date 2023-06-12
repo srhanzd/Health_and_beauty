@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,11 @@ class DoctorWorkingHour extends Model
     public function working_day()
     {
         return $this->belongsTo(WorkingDay::class,'WorkingDaysId','id');
+    }
+    public function getTimesPreiodAttribute($step){
+        $times= CarbonInterval::minute($step)->toPeriod($this->From,$this->To)->toArray();
+        return array_map(function ($time) {
+            return $time;//->format('H:i');
+        },$times);
     }
 }
