@@ -30,8 +30,10 @@ class DoctorWorkingHour extends Model
     }
     public function getTimesPreiodAttribute($step){
         $times= CarbonInterval::minute($step)->toPeriod($this->From,$this->To)->toArray();
+        array_pop($times); // Delete the last item from the array
         return array_map(function ($time) {
             return $time;//->format('H:i');
         },$times);
+
     }
 }

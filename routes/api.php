@@ -33,7 +33,10 @@ Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:us
     Route::get('doctor/availability',[\App\Http\Controllers\DoctorController::class, 'GetDoctorAvailability'])->name('doctor-availability');
     Route::get('clinic/doctors',[\App\Http\Controllers\ClinicController::class, 'GetClinicDoctors'])->name('clinic-doctors');
     Route::get('clinic/services',[\App\Http\Controllers\ServiceController::class, 'GetServices'])->name('clinic-services');
-    Route::get('appointment/index', [AppointmentController::class,'index']);
+    Route::get('appointment/index', [AppointmentController::class,'index'])->name('appointments=index');
+    Route::post('appointment/reserve', [AppointmentController::class,'reserve'])->name('reserve');
+    Route::get('profile', [\App\Http\Controllers\PatientController::class,'patient_profile'])->name('profile');
+    Route::put('profile/edit', [\App\Http\Controllers\PatientController::class,'patient_profile_edit'])->name('profile-edit');
 
     Route::get('logout',[AuthController::class, 'PatientLogout']);
 //    Route::post('patient_info',[AuthController::class, 'PatientInfo']);

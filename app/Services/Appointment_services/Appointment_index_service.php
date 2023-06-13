@@ -54,11 +54,13 @@ class Appointment_index_service
                     $hours = array_filter($hours);
                     $currentAppointment = Appointment::query()
                         ->where('DoctorId', $doctor_id)
+                        ->where('Status','=', 0)
                         ->where('Date', $date->toDateString())
                         ->pluck('Time')
                         ->flatMap(function ($time) use ($doctor_id, $date) {
                             $appointment = Appointment::query()
                                 ->where('DoctorId', $doctor_id)
+                                ->where('Status','=', 0)
                                 ->where('Date', $date->toDateString())
                                 ->where('Time', $time)->first();
                             $appointmentServiceStep = $appointment->service()->get('step')[0]['step'];
