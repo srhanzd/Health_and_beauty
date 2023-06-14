@@ -11,13 +11,30 @@ class Patient_profile_edit_service
     public function profile_edit(PatientProfileEditRequest  $request)
     {
         try {
-           $request->validated();
-           $user_data=$request->only(['phone_number','telephone_number','email']);
-           $patient_data=$request->only(['Address']);
-            $user_informations = auth()->user()->update($user_data);
-            $user_informations = auth()->user()->patient()->update($patient_data);
+            $validatedData = $request->validated();
+            $user = auth()->user();
 
-            return $this->returnSuccessMessage('Profile information updated successfully.',"S000",$request->header('lang'));
+            if (isset($validatedData['phone_number'])) {
+                $user->phone_number = $validatedData['phone_number'];
+            }
+
+            if (isset($validatedData['telephone_number'])) {
+                $user->telephone_number = $validatedData['telephone_number'];
+            }
+
+            if (isset($validatedData['email'])) {
+                $user->email = $validatedData['email'];
+            }
+
+            if (isset($validatedData['Address'])) {
+                $user->patient->Address = $validatedData['Address'];
+            }
+
+            $user->save();
+            $user->patient->save();
+
+            return $this->returnSuccessMessage('Profile information updated successfully.', "S000", $request->header('lang'));
+
 
         }
         catch

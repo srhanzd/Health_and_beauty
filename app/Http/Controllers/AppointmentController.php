@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AppointmentIndexRequest;
 use App\Http\Requests\AppointmentReserveRequest;
+use App\Services\Appointment_services\Appointment_get_pending_service;
 use App\Services\Appointment_services\Appointment_index_service;
 use App\Services\Appointment_services\AppointmentReserveService;
 use App\Traits\GeneralTrait;
@@ -14,10 +15,16 @@ class AppointmentController extends Controller
     use GeneralTrait;
     private $Appointment_index_service;
     private $Appointment_reserve_service;
-    public function __construct(Appointment_index_service $Appointment_index_service,AppointmentReserveService $Appointment_reserve_service)
+    private $Appointment_get_pending_service;
+    public function __construct(Appointment_index_service $Appointment_index_service,
+                                AppointmentReserveService $Appointment_reserve_service,
+                                Appointment_get_pending_service $Appointment_get_pending_service
+
+    )
     {
         $this->Appointment_index_service=$Appointment_index_service;
         $this->Appointment_reserve_service=$Appointment_reserve_service;
+        $this->Appointment_get_pending_service=$Appointment_get_pending_service;
     }
     public function index(AppointmentIndexRequest $request){
         try {
@@ -33,6 +40,14 @@ class AppointmentController extends Controller
     public function reserve(AppointmentReserveRequest $request){
         try {
         return $this->Appointment_reserve_service->reserve($request);
+            }
+        catch (\Exception $e){
+             return $this->returnError($e->getLine(), $e->getMessage(),$request->header('lang'));
+                             }
+    }
+    public function get_pending(Request $request){
+        try {
+        return $this->Appointment_get_pending_service->pending($request);
             }
         catch (\Exception $e){
              return $this->returnError($e->getLine(), $e->getMessage(),$request->header('lang'));

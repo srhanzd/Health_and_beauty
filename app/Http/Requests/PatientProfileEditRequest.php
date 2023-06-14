@@ -28,10 +28,10 @@ class PatientProfileEditRequest extends FormRequest
     public function rules()
     {
         return [
-                        'phone_number' => 'required|unique:users|digits:10',
-                        'telephone_number' => 'required|unique:users|digits_between:7,10',
-                        'email' => 'required|email|unique:users',
-                        'Address' => 'required',
+            'phone_number' => 'nullable|unique:users|digits:10',
+            'telephone_number' => 'nullable|unique:users|digits_between:7,10',
+            'email' => 'nullable|email|unique:users',
+            'Address' => 'nullable'
         ];
     }
     public function failedValidation(Validator $validator)

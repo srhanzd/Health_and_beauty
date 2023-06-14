@@ -35,6 +35,7 @@ Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:us
     Route::get('clinic/services',[\App\Http\Controllers\ServiceController::class, 'GetServices'])->name('clinic-services');
     Route::get('appointment/index', [AppointmentController::class,'index'])->name('appointments=index');
     Route::post('appointment/reserve', [AppointmentController::class,'reserve'])->name('reserve');
+    Route::get('appointment/pending', [AppointmentController::class,'get_pending'])->name('get-pending');
     Route::get('profile', [\App\Http\Controllers\PatientController::class,'patient_profile'])->name('profile');
     Route::put('profile/edit', [\App\Http\Controllers\PatientController::class,'patient_profile_edit'])->name('profile-edit');
 
