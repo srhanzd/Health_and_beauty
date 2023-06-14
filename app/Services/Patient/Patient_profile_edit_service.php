@@ -18,6 +18,7 @@ class Patient_profile_edit_service
                 $user->phone_number = $validatedData['phone_number'];
             }
 
+
             if (isset($validatedData['telephone_number'])) {
                 $user->telephone_number = $validatedData['telephone_number'];
             }

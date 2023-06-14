@@ -45,6 +45,7 @@ class AppointmentController extends Controller
              return $this->returnError($e->getLine(), $e->getMessage(),$request->header('lang'));
                              }
     }
+
     public function get_pending(Request $request){
         try {
         return $this->Appointment_get_pending_service->pending($request);

@@ -39,6 +39,7 @@ Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:us
     Route::get('profile', [\App\Http\Controllers\PatientController::class,'patient_profile'])->name('profile');
     Route::put('profile/edit', [\App\Http\Controllers\PatientController::class,'patient_profile_edit'])->name('profile-edit');
 
+
     Route::get('logout',[AuthController::class, 'PatientLogout']);
 //    Route::post('patient_info',[AuthController::class, 'PatientInfo']);
 

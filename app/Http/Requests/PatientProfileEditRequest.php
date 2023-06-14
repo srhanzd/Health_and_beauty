@@ -32,6 +32,7 @@ class PatientProfileEditRequest extends FormRequest
             'telephone_number' => 'nullable|unique:users|digits_between:7,10',
             'email' => 'nullable|email|unique:users',
             'Address' => 'nullable'
+
         ];
     }
     public function failedValidation(Validator $validator)

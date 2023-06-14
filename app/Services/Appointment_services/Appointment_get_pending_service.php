@@ -14,6 +14,7 @@ class Appointment_get_pending_service
 
         try {
 
+
             $user=auth()->user();
 
             $patient=$user->patient;
