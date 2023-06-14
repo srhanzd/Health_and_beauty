@@ -40,4 +40,14 @@ class PatientProfileEditRequest extends FormRequest
 
         throw new HttpResponseException($this->returnError(000,$validator->errors()->first(),$this->header('lang')));
     }
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $hasAnyField = $this->filled(['phone_number', 'telephone_number', 'email', 'Address']);
+
+            if (!$hasAnyField) {
+                $validator->errors()->add('fields', 'Please enter at least one field to update.');
+            }
+        });
+    }
 }
