@@ -16,7 +16,7 @@ class GetServicesService
             try {
                 $services = Service::query()->where('IsDeleted', '=', 0)
                     ->where('ClinicId', '=', $clinic_id)
-                    ->latest()->paginate(5);
+                    ->latest()->paginate(7);
 
                 return $this->returnData('services', $services, 'Services retrieved successfully.', $request->header('lang'));
 
