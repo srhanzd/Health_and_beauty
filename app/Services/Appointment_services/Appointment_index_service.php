@@ -115,6 +115,9 @@ class Appointment_index_service
 
                 }
             }
+            $appointments[]=[
+                'full-period' => $datePeriod
+            ];
             return $this->returnData('appointments',$appointments
             , 'Appointments available retrieved successfully.', $request->header('lang'));
 
