@@ -106,6 +106,8 @@ class Appointment_index_service
                     $availableHours = array_diff($availableHours, $currentAppointmentTimes);
                     $availableHours = array_values($availableHours);
 
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     $appointments[] = [
                         'day_name' => $dayName,
