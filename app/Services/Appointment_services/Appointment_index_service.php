@@ -51,6 +51,7 @@ class Appointment_index_service
                         }
                     }, $hours);
 //
+
                     $hours = array_filter($hours);
                     $currentAppointment = Appointment::query()
                         ->where('DoctorId', $doctor_id)

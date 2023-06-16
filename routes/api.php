@@ -41,6 +41,7 @@ Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:us
     Route::put('appointment/cancel', [AppointmentController::class,'cancel_appointment'])->name('cancel-appointment');
     Route::get('profile', [\App\Http\Controllers\PatientController::class,'patient_profile'])->name('profile');
     Route::put('profile/edit', [\App\Http\Controllers\PatientController::class,'patient_profile_edit'])->name('profile-edit');
+    Route::get('medical-info', [\App\Http\Controllers\MedicalInfoController::class,'patient_medical_info'])->name('medical-info');
 
 
     Route::get('logout',[AuthController::class, 'PatientLogout']);
