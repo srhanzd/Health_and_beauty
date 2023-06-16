@@ -114,10 +114,14 @@ class Appointment_index_service
                     ];
 
                 }
+              else $appointments[] = [
+                  'day_name' => $dayName,
+                  'date' => $date->format('d M'),
+                  'full_date' => $date->format('Y-m-d'),
+                   'off'=>true
+              ];
             }
-            $appointments[]=[
-                'full-period' => $datePeriod
-            ];
+
             return $this->returnData('appointments',$appointments
             , 'Appointments available retrieved successfully.', $request->header('lang'));
 
