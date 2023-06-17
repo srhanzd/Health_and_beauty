@@ -42,6 +42,11 @@ Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:us
     Route::get('profile', [\App\Http\Controllers\PatientController::class,'patient_profile'])->name('profile');
     Route::put('profile/edit', [\App\Http\Controllers\PatientController::class,'patient_profile_edit'])->name('profile-edit');
     Route::get('medical-info', [\App\Http\Controllers\MedicalInfoController::class,'patient_medical_info'])->name('medical-info');
+    Route::get('allergies', [\App\Http\Controllers\MedicalInfoController::class,'patient_allergies'])->name('patient-allergies');
+    Route::get('immunizations', [\App\Http\Controllers\MedicalInfoController::class,'patient_immunizations'])->name('patient-immunizations');
+    Route::get('medicines', [\App\Http\Controllers\MedicalInfoController::class,'patient_medicines'])->name('patient-medicines');
+    Route::get('surgeries', [\App\Http\Controllers\MedicalInfoController::class,'patient_surgeries'])->name('patient-surgeries');
+    Route::get('prescriptions', [\App\Http\Controllers\PrescriptionController::class,'patient_prescriptions'])->name('patient-prescriptions');
 
 
     Route::get('logout',[AuthController::class, 'PatientLogout']);

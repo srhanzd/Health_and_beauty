@@ -13,14 +13,13 @@ class Appointment_get_complete_service
 
         try {
 
-
             $user=auth()->user();
 
             $patient=$user->patient;
 
             $appointments=$patient->appointments()
                 ->where('IsDeleted','=',0)
-                ->where('Status','=',1)
+                ->where('Status','=',0)
                 ->latest()
                 ->with(["doctor" => function ($query) {
                     $query->where('IsDeleted', 0)
@@ -36,15 +35,7 @@ class Appointment_get_complete_service
                         }])
 
                     ;
-                }]) ->with(["prescriptions" => function ($query) {
-                    $query->where('IsDeleted', 0)
-                        ->with(["medicines" => function ($query) {
-                            $query->where('IsDeleted', 0);
-                        }])
-
-                    ;
-                }])
-                ->paginate(5);
+                }])->paginate(5);
             return $this->returnData('appointments',$appointments
                 , 'Complete Appointments retrieved successfully.', $request->header('lang'));
 
