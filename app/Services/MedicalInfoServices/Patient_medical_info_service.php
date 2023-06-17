@@ -27,7 +27,12 @@ class Patient_medical_info_service
                     $query->where('IsDeleted', 0);
                 }])
                 ->with(["prescriptions" => function ($query) {
-                    $query->where('IsDeleted', 0);
+                    $query->where('IsDeleted', 0)
+                        ->with(["medicines" => function ($query) {
+                        $query->where('IsDeleted', 0);
+                    }])
+
+                    ;
                 }])
                 ->get();
 

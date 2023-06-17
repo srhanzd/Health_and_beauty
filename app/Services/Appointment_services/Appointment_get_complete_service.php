@@ -21,7 +21,16 @@ class Appointment_get_complete_service
             $appointments=$patient->appointments()
                 ->where('IsDeleted','=',0)
                 ->where('Status','=',1)
-                ->latest()->paginate(5);
+                ->latest()
+                ->with(["prescriptions" => function ($query) {
+                    $query->where('IsDeleted', 0)
+                        ->with(["medicines" => function ($query) {
+                            $query->where('IsDeleted', 0);
+                        }])
+
+                    ;
+                }])
+                ->paginate(5);
             return $this->returnData('appointments',$appointments
                 , 'Complete Appointments retrieved successfully.', $request->header('lang'));
 
