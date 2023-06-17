@@ -22,7 +22,21 @@ class Appointment_get_complete_service
                 ->where('IsDeleted','=',0)
                 ->where('Status','=',1)
                 ->latest()
-                ->with(["prescriptions" => function ($query) {
+                ->with(["doctor" => function ($query) {
+                    $query->where('IsDeleted', 0)
+                        ->with(["user" => function ($query) {
+                            $query->where('IsDeleted', 0);
+                        }])
+
+                    ;
+                }]) ->with(["service" => function ($query) {
+                    $query->where('IsDeleted', 0)
+                        ->with(["clinic" => function ($query) {
+                            $query->where('IsDeleted', 0);
+                        }])
+
+                    ;
+                }]) ->with(["prescriptions" => function ($query) {
                     $query->where('IsDeleted', 0)
                         ->with(["medicines" => function ($query) {
                             $query->where('IsDeleted', 0);
