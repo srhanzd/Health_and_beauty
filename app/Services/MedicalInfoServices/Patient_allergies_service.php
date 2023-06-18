@@ -21,7 +21,7 @@ class Patient_allergies_service
                     ->first()
                     ->allergies()
                     ->where('IsDeleted', 0)
-                    ->paginate(5);
+                    ->paginate(7);
 
             return $this->returnData('allergies', $allergies, 'Allergies retrieved successfully.', $request->header('lang'));
         }

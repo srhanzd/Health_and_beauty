@@ -22,7 +22,7 @@ class Patient_surgeries_service
                     ->first()
                     ->surgeries()
                     ->where('IsDeleted', 0)
-                    ->paginate(5);
+                    ->paginate(7);
 
                 return $this->returnData('surgeries', $surgeries, 'Surgeries retrieved successfully.', $request->header('lang'));
             }

@@ -22,7 +22,7 @@ class Patient_immunizations_service
                     ->first()
                     ->immunizations()
                     ->where('IsDeleted', 0)
-                    ->paginate(5);
+                    ->paginate(7);
 
                 return $this->returnData('immunizations', $immunizations, 'Immunizations retrieved successfully.', $request->header('lang'));
             }

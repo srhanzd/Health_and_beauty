@@ -22,7 +22,7 @@ class Patient_medicines_service
                     ->first()
                     ->medicines()
                     ->where('IsDeleted', 0)
-                    ->paginate(5);
+                    ->paginate(7);
 
                 return $this->returnData('medicines', $medicines, 'Medicines retrieved successfully.', $request->header('lang'));
             }
