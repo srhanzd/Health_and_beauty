@@ -13,13 +13,11 @@ class Patient_medical_info_service
         try {
 
                 $user = auth()->user();
-            $medical_info = $user->medical_informations();
 
-
-
-                $medical_info = $medical_info
+                $medical_info = $user->medical_informations()
                     ->where('IsDeleted', 0)
                     ->first();
+
             if ($medical_info!=null) {
                 return $this->returnData('medical_info', $medical_info, 'Medical Info retrieved successfully.', $request->header('lang'));
             }
