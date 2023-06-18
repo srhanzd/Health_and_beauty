@@ -12,14 +12,19 @@ class Patient_medicines_service
     {
         try {
             $user = auth()->user();
-            $medicines = $user->medical_informations()
-                ->where('IsDeleted', 0)
-                ->first()
-                ->medicines()
-                ->where('IsDeleted', 0)
-                ->paginate(5);
+            $medical_inf = $user->medical_informations();
+            if ($medical_inf) {
 
-            return $this->returnData('medicines', $medicines, 'Medicines retrieved successfully.', $request->header('lang'));
+                $medicines = $medical_inf
+                    ->where('IsDeleted', 0)
+                    ->first()
+                    ->medicines()
+                    ->where('IsDeleted', 0)
+                    ->paginate(5);
+
+                return $this->returnData('medicines', $medicines, 'Medicines retrieved successfully.', $request->header('lang'));
+            }
+            return $this->returnError('090','Your medical record has not ben created yet !!! ',$request->header('lang'));
 
         }
         catch

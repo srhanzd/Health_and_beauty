@@ -12,14 +12,19 @@ class Patient_immunizations_service
     {
         try {
             $user = auth()->user();
-            $immunizations = $user->medical_informations()
-                ->where('IsDeleted', 0)
-                ->first()
-                ->immunizations()
-                ->where('IsDeleted', 0)
-                ->paginate(5);
+            $medical_inf = $user->medical_informations();
+            if ($medical_inf) {
 
-            return $this->returnData('immunizations', $immunizations, 'Immunizations retrieved successfully.', $request->header('lang'));
+                $immunizations = $medical_inf
+                    ->where('IsDeleted', 0)
+                    ->first()
+                    ->immunizations()
+                    ->where('IsDeleted', 0)
+                    ->paginate(5);
+
+                return $this->returnData('immunizations', $immunizations, 'Immunizations retrieved successfully.', $request->header('lang'));
+            }
+            return $this->returnError('090','Your medical record has not ben created yet !!! ',$request->header('lang'));
 
         }
         catch

@@ -12,14 +12,19 @@ class Patient_surgeries_service
     {
         try {
             $user = auth()->user();
-            $surgeries = $user->medical_informations()
-                ->where('IsDeleted', 0)
-                ->first()
-                ->surgeries()
-                ->where('IsDeleted', 0)
-                ->paginate(5);
+            $medical_inf = $user->medical_informations();
+            if ($medical_inf) {
 
-            return $this->returnData('surgeries', $surgeries, 'Surgeries retrieved successfully.', $request->header('lang'));
+                $surgeries = $medical_inf
+                    ->where('IsDeleted', 0)
+                    ->first()
+                    ->surgeries()
+                    ->where('IsDeleted', 0)
+                    ->paginate(5);
+
+                return $this->returnData('surgeries', $surgeries, 'Surgeries retrieved successfully.', $request->header('lang'));
+            }
+            return $this->returnError('090','Your medical record has not ben created yet !!! ',$request->header('lang'));
 
         }
         catch

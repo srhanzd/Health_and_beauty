@@ -47,6 +47,7 @@ Route::group( ['prefix' => 'patient','middleware' => ['auth:user-api','scopes:us
     Route::get('medicines', [\App\Http\Controllers\MedicalInfoController::class,'patient_medicines'])->name('patient-medicines');
     Route::get('surgeries', [\App\Http\Controllers\MedicalInfoController::class,'patient_surgeries'])->name('patient-surgeries');
     Route::get('prescriptions', [\App\Http\Controllers\PrescriptionController::class,'patient_prescriptions'])->name('patient-prescriptions');
+    Route::get('dynamic_attributes', [\App\Http\Controllers\DynamicController::class,'GetDynamicAttributes'])->name('dynamic-attributes');
 
 
     Route::get('logout',[AuthController::class, 'PatientLogout']);
