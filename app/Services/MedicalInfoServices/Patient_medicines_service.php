@@ -12,10 +12,12 @@ class Patient_medicines_service
     {
         try {
             $user = auth()->user();
-            $medical_inf = $user->medical_informations();
-            if ($medical_inf) {
+            $medical_info = $user->medical_informations()
+                ->where('IsDeleted', 0)
+                ->first();
+            if ($medical_info) {
 
-                $medicines = $medical_inf
+                $medicines = $user->medical_informations()
                     ->where('IsDeleted', 0)
                     ->first()
                     ->medicines()

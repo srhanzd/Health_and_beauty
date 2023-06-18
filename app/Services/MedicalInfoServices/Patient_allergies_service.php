@@ -12,9 +12,11 @@ class Patient_allergies_service
     {
         try {
             $user = auth()->user();
-            $medical_inf = $user->medical_informations();
-            if ($medical_inf){
-                $allergies = $medical_inf
+            $medical_info = $user->medical_informations()
+                ->where('IsDeleted', 0)
+                ->first();
+            if ($medical_info){
+                $allergies = $user->medical_informations()
                     ->where('IsDeleted', 0)
                     ->first()
                     ->allergies()
