@@ -17,7 +17,7 @@ class Patient_surgeries_service
                 ->first();
             if ($medical_info) {
 
-                $surgeries = $medical_info
+                $surgeries = $user->medical_informations()
                     ->where('IsDeleted', 0)
                     ->first()
                     ->surgeries()
