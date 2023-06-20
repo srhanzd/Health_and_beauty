@@ -37,7 +37,7 @@ public function LogIn(LoginRequest $request){
     catch
     (\Exception $e){
 
-        return $this->returnError($e->getLine(), $e->getMessage());
+        return $this->returnError($e->getLine(), $e->getMessage(),$request->header('lang'));
 
     }
 
