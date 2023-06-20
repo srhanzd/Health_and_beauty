@@ -15,7 +15,7 @@ class ClinicSeeder extends Seeder
     public function run()
     {
 
-        for ($i=1 ;$i<=15;$i++) {
+        for ($i=1 ;$i<=8;$i++) {
                 Clinic::query()->updateOrCreate(
                     [
                         'Name' => 'Clinic '.$i,
