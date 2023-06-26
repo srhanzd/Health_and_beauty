@@ -19,7 +19,7 @@ class DoctorSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 1; $i <= 15; $i++) {
+        for ($i = 1; $i <= 8; $i++) {
           $user=  User::query()->create([
                 'name' => 'Dsrhan  '.$i . Str::random(5),
                 'first_name' => 'Dsrhan  '.$i . Str::random(5),

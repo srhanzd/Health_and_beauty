@@ -2,6 +2,7 @@
 
 namespace App\Services\Appointment_services;
 
+use App\Events\NewReservation;
 use App\Http\Requests\AppointmentReserveRequest;
 use App\Models\Appointment;
 use App\Models\Service;
@@ -18,9 +19,10 @@ class AppointmentReserveService
 
         try {
 
+            $data= array_merge($request->all(),['user_id'=>auth()->id()]);
 
             Appointment::query()->create($request->all());
-//            event(new NewResrvation($data))
+            event(new NewReservation($data));
 
             return $this->returnSuccessMessage('Appointment Reserved successfully.',
                 'S000',

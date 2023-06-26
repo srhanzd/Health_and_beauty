@@ -8,12 +8,14 @@
         "php": "^7.3|^8.0",
         "ext-http": "*",
         "ext-json": "*",
+        "beyondcode/laravel-websockets": "^1.14",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/passport": "*",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "pusher/pusher-php-server": "^7.2",
         "stichoza/google-translate-php": "*"
     },
     "require-dev": {
