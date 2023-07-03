@@ -50,4 +50,8 @@ class DynamicAttribute extends Model
     {
         return $this->hasMany(Rule::class,'DynamicAttributeId','id');
     }
+    public function new_rules()
+    {
+        return $this->hasMany(Rule::class,'NewDynamicAttributeId','id');
+    }
 }

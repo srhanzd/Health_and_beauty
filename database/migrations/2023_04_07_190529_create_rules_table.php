@@ -18,7 +18,9 @@ class CreateRulesTable extends Migration
             $table->unsignedBigInteger('StaticAttributeID')->nullable(true);
             $table->foreign('StaticAttributeID')->references('id')->on('Static_Attributes');
             $table->unsignedBigInteger('DynamicAttributeId')->nullable(true);
+            $table->unsignedBigInteger('NewDynamicAttributeId')->nullable(false);
             $table->foreign('DynamicAttributeId')->references('id')->on('Dynamic_Attributes');
+            $table->foreign('NewDynamicAttributeId')->references('id')->on('Dynamic_Attributes');
             $table->unsignedBigInteger('OperationId');
             $table->foreign('OperationId')->references('id')->on('operations');
             $table->unsignedBigInteger('ClinicId');

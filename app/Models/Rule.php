@@ -12,6 +12,7 @@ class Rule extends Model
     protected $fillable = [
         'StaticAttributeID',
         'DynamicAttributeId',
+        'NewDynamicAttributeId',
         'OperationId',
         'ClinicId',
         'OperationValueString',
@@ -28,6 +29,10 @@ class Rule extends Model
     public function dynamic_attribute()
     {
         return $this->belongsTo(DynamicAttribute::class,'DynamicAttributeId','id');
+    }
+    public function new_dynamic_attribute()
+    {
+        return $this->belongsTo(DynamicAttribute::class,'NewDynamicAttributeId','id');
     }
     public function operation()
     {
