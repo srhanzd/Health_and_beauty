@@ -19,9 +19,10 @@ class AppointmentReserveService
 
         try {
 
-            $data= array_merge($request->all(),['user_id'=>auth()->id()]);
 
-            Appointment::query()->create($request->all());
+
+           $appointment= Appointment::query()->create($request->all());
+            $data= array_merge($request->all(),['user_id'=>$appointment->patient->user->id]);
             event(new NewReservation($data));
 
             return $this->returnSuccessMessage('Appointment Reserved successfully.',

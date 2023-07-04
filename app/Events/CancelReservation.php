@@ -4,33 +4,34 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Notification;
 
-class NewReservation implements ShouldBroadcast
+class CancelReservation implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $resrvation;
+
+    public $reservation;
     public $notification;
+
     /**
      * Create a new event instance.
      *
+     * @param  array  $reservation
      * @return void
      */
-    public function __construct($resrvation)
+    public function __construct($reservation)
     {
-        $this->resrvation=$resrvation;
+        $this->reservation = $reservation;
         $this->notification = new Notification();
-        $this->notification->Title = 'New Reservation';
-        $this->notification->Data = 'A new reservation has been made: ' . "\n" .
-            'Day: ' . $this->resrvation['Date'] . "\n" .
-            'Time: ' . $this->resrvation['Time'];
-//        $notification->FromUserId = auth()->user()->id; // Assuming you have authenticated users
-        $this->notification->ToUserId = $this->resrvation['user_id'];
+        $this->notification->Title = 'Reservation Canceled';
+        $this->notification->Data = 'Your reservation has been canceled.' . "\n" .
+            'Day: ' . $this->reservation['Date'] . "\n" .
+            'Time: ' . $this->reservation['Time'];
+        $this->notification->ToUserId = $this->reservation['user_id'];
         $this->notification->save();
     }
 
@@ -43,7 +44,6 @@ class NewReservation implements ShouldBroadcast
     {
         return [
             'notification' => $this->notification,
-           // 'resrvation'=>$this->resrvation
         ];
     }
 
@@ -54,9 +54,6 @@ class NewReservation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // dd($this->resrvation['user_id']);
-//        return new PrivateChannel('reservation_reminder.'.$this->resrvation['user_id']);
-        return new PrivateChannel('user.'.$this->resrvation['user_id']);
+        return new PrivateChannel('user.'.$this->reservation['user_id']);
     }
-
 }
