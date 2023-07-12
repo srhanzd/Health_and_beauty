@@ -18,6 +18,7 @@ class Cancel_appointment_service
 
 
            $appointment_id=$request->validated()['AppointmentId'];
+           $notification_token=$request->validated()['Notification_token'];
 
             $appointment=Appointment::query()
                 ->where('IsDeleted','=',0)
@@ -30,7 +31,12 @@ class Cancel_appointment_service
             $date = Carbon::parse($appointment->Date)->toDateString();
             $time = Carbon::parse($appointment->Time)->toTimeString();
 
-            $data =  ['user_id' => $appointment->patient->user->id, 'Date' => $date, 'Time' => $time];
+            $data =  ['user_id' => $appointment->patient->user->id,
+                'Date' => $date,
+                'Time' => $time
+                ,'Notification_token'=>$notification_token
+
+            ];
             event(new CancelReservation($data));
             return $this->returnSuccessMessage(
                 'Appointment Canceled successfully.','S000', $request->header('lang'));

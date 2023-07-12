@@ -16,7 +16,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "pusher/pusher-php-server": "^7.2",
-        "stichoza/google-translate-php": "*"
+        "stichoza/google-translate-php": "*",
+      "ext-curl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

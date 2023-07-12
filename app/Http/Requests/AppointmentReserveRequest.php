@@ -34,6 +34,7 @@ class AppointmentReserveRequest extends FormRequest
         return [
             'DoctorId'=> 'required',
             'ServiceId'=> 'required',
+            'Notification_token'=> 'required',
             'Date'=>['required','date_format:Y-m-d'],
             'Time'=>['required','date_format:H:i'],
         ];

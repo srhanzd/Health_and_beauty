@@ -31,6 +31,7 @@ class CancelAppointmentRequest extends FormRequest
     {
         return [
             'AppointmentId'=> 'required',
+            'Notification_token'=> 'required',
         ];
     }
 
